@@ -3,7 +3,7 @@ import "./styles.css";
 
 export const App = () => {
   // TODOテキストのステート
-  const [todoText, setTodoText] = useState("初期");
+  const [todoText, setTodoText] = useState("");
   // 未完了TODOリストの配列ステート
   const [incompleteList, setIncompleteList] = useState(["aaaa", "iiii"]);
   // 完了TODOリストの配列ステート
@@ -14,9 +14,20 @@ export const App = () => {
 
   // 追加ボタン押下時
   const onClickAddButton = () => {
-    const newTodoList = [...incompleteList, todoText];
-    setIncompleteList(newTodoList);
+    const newIncompleteList = [...incompleteList, todoText];
+    setIncompleteList(newIncompleteList);
     setTodoText("");
+  };
+
+  // 完了ボタン押下時
+  const onClickCompleteButton = (index) => {
+    // 未完了リストから削除
+    const newIncompleteList = [...incompleteList];
+    newIncompleteList.splice(index, 1);
+    setIncompleteList(newIncompleteList);
+    // 完了リストに追加
+    const newCompleteList = [...completeList, incompleteList[index]];
+    setCompleteList(newCompleteList);
   };
 
   return (
@@ -36,7 +47,9 @@ export const App = () => {
             return (
               <div key={index} className="list-row">
                 <li>{todo}</li>
-                <button>完了</button>
+                <button onClick={() => onClickCompleteButton(index)}>
+                  完了
+                </button>
                 <button>削除</button>
               </div>
             );
