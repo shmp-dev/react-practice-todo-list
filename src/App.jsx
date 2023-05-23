@@ -19,6 +19,14 @@ export const App = () => {
     setTodoText("");
   };
 
+  // 削除ボタン押下時
+  const onClickDeleteButton = (index) => {
+    // 未完了リストから削除
+    const newIncompleteList = [...incompleteList];
+    newIncompleteList.splice(index, 1);
+    setIncompleteList(newIncompleteList);
+  };
+
   // 完了ボタン押下時
   const onClickCompleteButton = (index) => {
     // 未完了リストから削除
@@ -50,7 +58,7 @@ export const App = () => {
                 <button onClick={() => onClickCompleteButton(index)}>
                   完了
                 </button>
-                <button>削除</button>
+                <button onClick={() => onClickDeleteButton(index)}>削除</button>
               </div>
             );
           })}
