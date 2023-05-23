@@ -14,7 +14,9 @@ export const App = () => {
 
   // 追加ボタン押下時
   const onClickAddButton = () => {
-    alert("追加");
+    const newTodoList = [...incompleteList, todoText];
+    setIncompleteList(newTodoList);
+    setTodoText("");
   };
 
   return (
