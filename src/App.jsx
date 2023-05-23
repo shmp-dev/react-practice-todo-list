@@ -38,6 +38,17 @@ export const App = () => {
     setCompleteList(newCompleteList);
   };
 
+  // 戻すボタン押下時
+  const onClickReturnButton = (index) => {
+    // 完了リストから削除
+    const newCompleteList = [...completeList];
+    newCompleteList.splice(index, 1);
+    setCompleteList(newCompleteList);
+    // 未完了リストに追加
+    const newIncompleteList = [...incompleteList, completeList[index]];
+    setIncompleteList(newIncompleteList);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -71,7 +82,7 @@ export const App = () => {
             return (
               <div key={index} className="list-row">
                 <li>{todo}</li>
-                <button>戻す</button>
+                <button onClick={() => onClickReturnButton(index)}>戻す</button>
               </div>
             );
           })}
